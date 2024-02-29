@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>form-validation</title>
+        <style>
+            body{
+                background-image: url('https://images.ctfassets.net/pdf29us7flmy/2Uw7TkS7XvJG2MDeMATlfA/14f825b7aef2746abe4d4376a022c8b4/resized.png?w=720&q=100&fm=jpg');
+                height: 100%;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            .job-application{
+                margin-left: 28%;
+                margin-top: 7%;
+                margin-right: 27%;
+                margin-bottom: 12%;
+                background-color: white;
+                padding-left: 20px;
+            }
+            button{
+                background: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="job-application">
+            <form method="get" onsubmit="validate()">
+                <center><h1>Job Application form</h1></center>
+                <label for="name"><b>Name:</b></label>
+                <input type="text" id="name" name="name"  ><br>
+                <h4>Gender:</h4>
+                <input type="radio" id="m" name="gender" value="Male" required>
+                <label for="m">Male</label><br>
+                <input type="radio" id="f" name="gender" value="Female" required>
+                <label for="f">Female</label><br>
+                <input type="radio" id="o" name="gender" value="Other" required>
+                <label for="o">Other</label><br><br>
+                <label for="email"><b>Email:</b></label>
+                <input type="email" id="email" name="email"  ><br><br>
+                <label for="pwd"><b>Password:</b></label>
+                <input type="password" id="pwd" name="pwd" minlength="8"  ><br><br>
+                <label for="pwd"><b>Confirm Password:</b></label>
+                <input type="password" id="cpwd" name="cpwd" minlength="8"  ><br><br>
+                <label for="num"><b>Mobile Number:</b></label>
+                <input type="number" id="no" name="no"><br><br>
+                <label for="pass"><b>Job Role</b></label>
+                <select name="role" id="role">
+                    <option value="dev">Developer</option>
+                    <option value="test">Tester</option>
+                    <option value="ds">Data Scientist</option>
+                    <option value="db">Database Administrator</option>
+                </select>
+                <h4>Skills:</h4>
+                <input type="checkbox" id="skill" name="skill" value="Algorithms and Data Structures">
+                <label for="skill1">Algorithms and Data Structures</label><br>
+                <input type="checkbox" id="skill" name="skill" value="Database Administration and Management">
+                <label for="skill2">Database Administration and Management</label><br>
+                <input type="checkbox" id="skill" name="skill" value="Operating Systems">
+                <label for="skill3">Operating Systems</label><br>
+                <input type="checkbox" id="skill" name="skill" value="Communication Skills">
+                <label for="skill4">Communication Skills</label><br>
+                <input type="checkbox" id="skill" name="skill" value="Problem-Solving and Analytical Thinking">
+                <label for="skill5">Problem-Solving and Analytical Thinking</label><br>
+                <input type="checkbox" id="skill" name="skill" value="Adaptability and Continuous Learning">
+                <label for="skill6">Adaptability and Continuous Learning</label><br>
+                <h4>Drop your queries in the space provided below:</h4>
+                <textarea name="queries" rows="10" cols="50"></textarea><br><br>
+                <input type="submit" value="submit" onclick="Validate()">
+            </form>
+        </div>
+        <script>
+            function Validate() {
+                let Nval=/^[a-zA-Z ]+$/;
+                let NoVal=/^\d{10}$/;
+                let Name = document.getElementById("name").value;
+                let Email = document.getElementById("email").value;
+                let Pwd = document.getElementById("pwd").value;
+                let CPwd = document.getElementById("cpwd").value;
+                let No = document.getElementById("no").value;
+                var checkboxes = document.getElementsByName('skill');
+                var isChecked = false;
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i].checked) {
+                        isChecked = true;
+                        break;
+                    }
+                }
+                if(Name == "" || Name == null || Email == "" || Email == null || Pwd == "" || Pwd == null || CPwd == "" || CPwd == null || No == "" || No == null)
+                {
+                    alert("Fill all the fields")
+                    return false;
+                }
+                else if (!isChecked){
+                    alert("Fill all the fields")
+                    return false;
+                }
+                else if (!Name.match(Nval)) {
+                    alert("Name is invalid")
+                    return false;
+                }
+                else if(Pwd!==CPwd)
+                {
+                    alert("Password and Confirm password should be same")
+                    return false;
+                }
+                else if(!No.match(NoVal))
+                {
+                    alert("Enter a valid Mobile Number")
+                    return false;
+                }
+                alert("Your form is submitted")
+                return true;
+            }
+        </script>
+    </body>
+</html> 
